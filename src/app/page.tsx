@@ -8,6 +8,7 @@ import InfoPanel from "@/components/sidebar/infoPanel";
 
 const MapView = dynamic(() => import("@/components/map/MapView"), {
   ssr: false,
+  loading: () => <p>Chargement de la carte...</p>,
 });
 
 export default function HomePage() {
