@@ -2,7 +2,7 @@
 
 Application web SIG construite avec Next.js pour rechercher des communes francaises, afficher leur position sur une carte interactive et consulter quelques informations administratives.
 
-![Capture de l'application](/Users/verdoyant/dev/geo-collectivites-explorer/public/screenshots/app-home.png)
+![Capture de l'application](public/screenshots/app-home.png)
 
 ## Objectif du projet
 
