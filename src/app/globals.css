@@ -6,22 +6,25 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #edf4ff;
+  --foreground: #11203f;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: #ffffff;
+  --surface-muted: rgba(227, 239, 255, 0.82);
+  --border: rgba(120, 154, 214, 0.24);
+  --border-strong: rgba(53, 101, 191, 0.24);
+  --primary: #1f5fd6;
+  --primary-strong: #1549ad;
+  --primary-soft: rgba(31, 95, 214, 0.12);
+  --accent: #4ea4ff;
+  --shadow: 0 24px 70px rgba(15, 54, 122, 0.18);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 html,
@@ -31,9 +34,157 @@ body,
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(78, 164, 255, 0.28), transparent 34%),
+    radial-gradient(circle at top right, rgba(31, 95, 214, 0.24), transparent 30%),
+    linear-gradient(180deg, #f6faff 0%, #edf4ff 44%, #f8fbff 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), sans-serif;
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+*::selection {
+  background: rgba(31, 95, 214, 0.18);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+.app-shell::before {
+  inset: 6rem auto auto -7rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: rgba(78, 164, 255, 0.18);
+}
+
+.app-shell::after {
+  inset: auto -6rem 8rem auto;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 999px;
+  background: rgba(31, 95, 214, 0.14);
+}
+
+.glass-panel {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.section-label {
+  color: var(--primary);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ui-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.ui-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.3), transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 320ms ease;
+}
+
+.ui-button:hover {
+  transform: translateY(-1px);
+}
+
+.ui-button:hover::after {
+  transform: translateX(120%);
+}
+
+.ui-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.ui-button-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #3778eb 100%);
+  color: white;
+  box-shadow: 0 12px 28px rgba(31, 95, 214, 0.28);
+}
+
+.ui-button-primary:hover {
+  box-shadow: 0 16px 34px rgba(31, 95, 214, 0.34);
+}
+
+.ui-button-secondary {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: var(--border-strong);
+  color: var(--foreground);
+}
+
+.ui-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(31, 95, 214, 0.34);
+}
+
+.leaflet-container {
+  background: linear-gradient(180deg, #dcebff 0%, #f6faff 100%);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.leaflet-control-zoom a {
+  border: 1px solid var(--border) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: var(--foreground) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--foreground);
+  box-shadow: 0 16px 36px rgba(15, 54, 122, 0.18);
+}

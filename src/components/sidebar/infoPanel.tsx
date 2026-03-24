@@ -7,10 +7,12 @@ type Props = {
 export default function InfoPanel({ feature }: Props) {
   if (!feature) {
     return (
-      <div className="rounded-2xl border bg-white p-5">
-        <h2 className="mb-2 text-lg font-semibold">Informations</h2>
-        <p className="text-sm text-slate-600">
-          Sélectionne une commune pour afficher ses informations.
+      <div className="glass-panel rounded-[28px] p-5 sm:p-6">
+        <p className="section-label text-xs font-bold">Details</p>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-950">Informations territoriales</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Selectionnez une commune dans la liste pour afficher son profil administratif et
+          les notions SIG associees.
         </p>
       </div>
     );
@@ -19,24 +21,31 @@ export default function InfoPanel({ feature }: Props) {
   const p = feature.properties;
 
   return (
-    <div className="rounded-2xl border bg-white p-5 space-y-3">
-      <h2 className="text-lg font-semibold">{p.nom}</h2>
-      <div className="text-sm text-slate-700 space-y-1">
-        <p><strong>Code INSEE :</strong> {p.code}</p>
-        <p><strong>Département :</strong> {p.codeDepartement}</p>
-        <p><strong>Région :</strong> {p.codeRegion}</p>
-        <p><strong>Population :</strong> {p.population ?? "N/A"}</p>
-        <p><strong>Type :</strong> {feature.geometry?.type ?? "N/A"}</p>
-      </div>
+    <div className="glass-panel rounded-[28px] p-5 sm:p-6">
+      <div className="space-y-6">
+        <div>
+          <p className="section-label text-xs font-bold">Fiche commune</p>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{p.nom}</h2>
+        </div>
 
-      <div className="rounded-xl bg-slate-50 p-3 text-sm text-slate-600">
-        <p><strong>Notions SIG mobilisées :</strong></p>
-        <ul className="list-disc pl-5">
-          <li>GeoJSON</li>
-          <li>Couche vecteur</li>
-          <li>Référentiel administratif</li>
-          <li>Carte interactive</li>
-        </ul>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Code INSEE</p>
+            <p className="mt-2 text-lg font-semibold text-slate-950">{p.code}</p>
+          </div>
+          <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Departement</p>
+            <p className="mt-2 text-lg font-semibold text-slate-950">{p.codeDepartement}</p>
+          </div>
+          <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Region</p>
+            <p className="mt-2 text-lg font-semibold text-slate-950">{p.codeRegion}</p>
+          </div>
+          <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Population</p>
+            <p className="mt-2 text-lg font-semibold text-slate-950">{p.population ?? "N/A"}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -44,27 +44,45 @@ function FitToFeature({ feature }: { feature: CommuneFeature | null }) {
 
 export default function MapView({ selectedFeature }: { selectedFeature: CommuneFeature | null }) {
   return (
-    <MapContainer
-      center={[46.6, 2.4]}
-      zoom={6}
-      className="h-[70vh] w-full rounded-2xl"
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <div className="glass-panel overflow-hidden rounded-[32px] p-3 sm:p-4">
+      <div className="mb-4 flex flex-col gap-4 rounded-[24px] border border-white/70 bg-white/75 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="section-label text-xs font-bold">Cartographie</p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-950">Vue geospatiale interactive</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+            Naviguez dans la carte, zoomez sur une commune selectionnée et visualisez ses
+            informations cles dans un environnement de consultation fluide.
+          </p>
+        </div>
+        <div className="rounded-2xl bg-[var(--primary-soft)] px-4 py-3 text-sm font-medium text-[var(--primary-strong)]">
+          {selectedFeature ? `Commune active : ${selectedFeature.properties.nom}` : "Aucune commune selectionnée"}
+        </div>
+      </div>
 
-      {selectedFeature && (
-        <>
-          <Marker position={toLatLng(selectedFeature)} icon={defaultMarkerIcon}>
-            <Popup>
-              <div>
-                <h3>{selectedFeature.properties.nom}</h3>
-                <p>Code INSEE : {selectedFeature.properties.code}</p>
-              </div>
-            </Popup>
-          </Marker>
+      <div className="overflow-hidden rounded-[28px] border border-[var(--border)]">
+        <MapContainer
+          center={[46.6, 2.4]}
+          zoom={6}
+          className="h-[72vh] w-full"
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <FitToFeature feature={selectedFeature} />
-        </>
-      )}
-    </MapContainer>
+          {selectedFeature && (
+            <>
+              <Marker position={toLatLng(selectedFeature)} icon={defaultMarkerIcon}>
+                <Popup>
+                  <div className="space-y-1">
+                    <h3 className="text-base font-semibold">{selectedFeature.properties.nom}</h3>
+                    <p className="text-sm">Code INSEE : {selectedFeature.properties.code}</p>
+                  </div>
+                </Popup>
+              </Marker>
+
+              <FitToFeature feature={selectedFeature} />
+            </>
+          )}
+        </MapContainer>
+      </div>
+    </div>
   );
 }

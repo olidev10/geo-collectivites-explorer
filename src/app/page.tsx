@@ -14,17 +14,11 @@ export default function HomePage() {
   const [selectedFeature, setSelectedFeature] = useState<CommuneCollection["features"][0] | null>(null);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-6">
-      <div className="mx-auto max-w-7xl space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-3xl font-bold">Geo Collectivités Explorer</h1>
-          <p className="text-slate-600">
-            Mini application web SIG pour explorer des données territoriales françaises.
-          </p>
-        </header>
+    <main className="app-shell min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl space-y-6">
 
-        <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <aside className="space-y-4">
+        <div className="grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)]">
+          <aside className="space-y-5">
             <CommuneSearch onSelect={setSelectedFeature} />
             <InfoPanel feature={selectedFeature} />
           </aside>

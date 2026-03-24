@@ -11,7 +11,7 @@ export type CommuneCollection = {
       codeDepartement: string;
       codeRegion: string;
       population?: number;
-      type?: string[]; // Ex: ["commune", "chef-lieu", "sous-prefecture"]
+      type: string; // Ex: "commune", "chef-lieu", "sous-prefecture"
     };
   }[];
 };
